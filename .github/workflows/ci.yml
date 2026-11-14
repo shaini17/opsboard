@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+
+jobs:
+  frontend-ci:
+    name: Frontend CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          cache: npm
+          cache-dependency-path: package-lock.json
+          node-version: '26'
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint code
+        run: npm run lint 
+      - name: Run tests
+        run: npm test
+      - name: Build project
+        run: npm run build
+
+ 
+  backend-ci:
+    name: Backend CI
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+          node-version: '26'
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm test
+        
+        

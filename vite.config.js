@@ -9,11 +9,16 @@ export default defineConfig({
     tailwindcss(),
   ],
 
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/test/setup.js',
-    css: true,
-    clearMocks: true,
-  },
+ test: {
+  globals: true,
+  environment: 'jsdom',
+  setupFiles: './src/test/setup.js',
+  css: true,
+  clearMocks: true,
+  exclude: [
+    '**/node_modules/**',
+    '**/dist/**',
+    '**/backend/**',
+  ],
+},
 })
