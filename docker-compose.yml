@@ -17,9 +17,7 @@
       retries: 10
 
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    image: shaini17/opsboard-backend:latest
     container_name: opsboard-backend
     restart: unless-stopped
     env_file:
@@ -32,7 +30,7 @@
       DB_NAME: opsboard
       DB_USER: opsboard
       DB_PASSWORD: ${POSTGRES_PASSWORD}
-      CLIENT_URL: http://localhost
+      CLIENT_URL: ${CLIENT_URL:-http://localhost}
     depends_on:
       database:
         condition: service_healthy
@@ -47,9 +45,7 @@
       retries: 5
 
   frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: shaini17/opsboard-frontend:latest
     container_name: opsboard-frontend
     restart: unless-stopped
     ports:
