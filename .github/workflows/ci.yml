@@ -43,7 +43,7 @@ jobs:
           cache: npm
           cache-dependency-path: backend/package-lock.json
           node-version: '26'
-      - name: Install dependencies
+      - name: Install Required dependencies 
         run: npm ci
       - name: Run tests
         run: npm test
