@@ -74,6 +74,3 @@ jobs:
             context: ./backend
             push: true
             tags: shaini17/opsboard-backend:latest
-
-        
-        
