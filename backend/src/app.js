@@ -1,4 +1,3 @@
-
 import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
@@ -16,6 +15,9 @@ import auditRoutes from './routes/auditRoutes.js'
 import settingsRoutes from './routes/settingsRoutes.js'
 
 const app = express()
+
+// Trust the single Nginx proxy in front of this backend.
+app.set('trust proxy', 1)
 
 app.use(helmet())
 app.use(cors({
